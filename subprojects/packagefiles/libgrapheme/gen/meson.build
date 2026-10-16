@@ -1,5 +1,15 @@
 gendir = include_directories('.')
 gen_headers_tgt = {
+	'bidirectional-test': files(
+		'../data/BidiTest.txt',
+    '../data/BidiCharacterTest.txt'
+	),
+  'bidirectional': files(
+    '../data/BidiBrackets.txt',
+    '../data/DerivedBidiClass.txt',
+    '../data/BidiMirroring.txt',
+    '../data/UnicodeData.txt'
+  ),
   'case': files(
     '../data/DerivedCoreProperties.txt',
     '../data/SpecialCasing.txt',
@@ -37,7 +47,7 @@ foreach exe_name, data_files : gen_headers_tgt
     hdr,
     output: hdr,
     depend_files: data_files,
-    command: [chdir_wrapper, exe],
+    command: ['python3', chdir_wrapper, exe],
     env: {
       'PROJECT_SOURCE_ROOT': meson.project_source_root(),
     },
